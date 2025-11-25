@@ -2,10 +2,12 @@ package com.example.spring.selection_insertion.controller;
 
 import com.example.spring.selection_insertion.service.SortService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.example.spring.selection_insertion.dto.RequestCadena;
 
@@ -17,7 +19,7 @@ public class SortController {
        SortService service;
 
     @PostMapping("/burbuja")
-    public int[] bubbleSort(@RequestBody RequestCadena request){
+    public ResponseEntity<?> bubbleSort(@RequestBody RequestCadena request){
 
         
         String[] partes= request.getCadena().split(",");
@@ -26,7 +28,7 @@ public class SortController {
             
             numeros[i] = Integer.parseInt(partes[i]);
         }
-        return service.sort(numeros);
+        return ResponseEntity.ok(service.sort(numeros));
     }
 
 
